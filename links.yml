@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=./schema/links.schema.json
+#
+# This file is the whole site. Edit it, run `npm run validate`, then deploy.
+# Agents: see AGENTS.md for the rules.
+
+profile:
+  name: Ada Okafor
+  handle: "@adaokafor"
+  location: Lisbon
+  bio: Product designer building calm tools for loud teams. Writing about type, interfaces and the craft in between.
+  status: Booking projects for March
+  # avatar: /avatar.jpg   # put the file in public/ — omit to show a monogram
+
+socials:
+  - icon: github
+    url: https://github.com/
+  - icon: linkedin
+    url: https://www.linkedin.com/
+  - icon: bluesky
+    url: https://bsky.app/
+  - icon: instagram
+    url: https://www.instagram.com/
+  - icon: mail
+    url: mailto:hello@example.com
+
+links:
+  - title: Read the field guide to quiet interfaces
+    description: A 40-page essay on designing software that stays out of the way.
+    url: https://example.com/field-guide
+    featured: true
+
+  - section: Work
+  - title: Portfolio
+    description: Selected product work, 2019–2026
+    url: https://example.com
+    icon: globe
+  - title: Dribbble shots
+    url: https://dribbble.com/
+    icon: dribbble
+
+  - section: Elsewhere
+  - title: Newsletter — one idea a week
+    url: https://example.substack.com
+    icon: substack
+  - title: Talks on YouTube
+    url: https://www.youtube.com/
+    icon: youtube
+  - title: Book a 30-minute call
+    url: https://cal.com/
+    icon: calendar
+
+theme:
+  preset: studio   # studio | midnight | bloom | mono
+  mode: auto       # auto | light | dark
+  # accent: "#2F45FF"
+  # radius: soft   # sharp | soft | round
+
+meta:
+  title: Ada Okafor — product designer
+  # url: https://links.example.com
+  # image: /og.png
+
+# analytics:
+#   cloudflare_token: 0123456789abcdef0123456789abcdef

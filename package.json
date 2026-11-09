@@ -1,0 +1,38 @@
+{
+  "name": "social-links",
+  "version": "0.1.0",
+  "description": "A design-first, open-source link-in-bio page. One YAML file, static HTML, free on Cloudflare.",
+  "scripts": {
+    "validate": "node scripts/build.mjs --check",
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "preview": "npm run build && npx --yes serve dist",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "keywords": [
+    "link-in-bio",
+    "links",
+    "cloudflare",
+    "yaml",
+    "static-site"
+  ],
+  "author": "rmadrazo97",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "8.20.0",
+    "simple-icons": "16.37.0",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "wrangler": "4.158.0"
+  },
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmadrazo97/social-links.git"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

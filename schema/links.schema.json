@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/rmadrazo97/social-links/schema/links.schema.json",
+  "title": "social-links config",
+  "description": "Everything shown on the page lives in links.yml. This schema validates it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "links"
+  ],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Display name, set large at the top."
+        },
+        "handle": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Short handle shown under the name, e.g. @ada."
+        },
+        "bio": {
+          "type": "string",
+          "maxLength": 280,
+          "description": "One or two sentences. Plain text."
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Path to an image in public/ (e.g. /avatar.jpg) or an https:// URL. Omit to show a monogram."
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "status": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Optional live line with a pulsing dot, e.g. 'Booking projects for March'."
+        }
+      }
+    },
+    "socials": {
+      "type": "array",
+      "description": "Icon-only row under the bio. Keep it to 6 or fewer.",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "icon",
+          "url"
+        ],
+        "properties": {
+          "icon": {
+            "type": "string",
+            "description": "simple-icons slug (github, x, instagram, youtube, tiktok, bluesky, threads, mastodon, spotify, discord\u2026) or one of: linkedin, mail, globe, link, rss, phone, calendar."
+          },
+          "url": {
+            "$ref": "#/definitions/url"
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible name. Defaults to the platform name."
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered list of link rows and section headings.",
+      "items": {
+        "if": {
+          "type": "object",
+          "required": [
+            "section"
+          ]
+        },
+        "then": {
+          "$ref": "#/definitions/section"
+        },
+        "else": {
+          "$ref": "#/definitions/link"
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preset": {
+          "enum": [
+            "studio",
+            "midnight",
+            "bloom",
+            "mono"
+          ],
+          "default": "studio"
+        },
+        "mode": {
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "default": "auto",
+          "description": "auto follows the visitor's system setting."
+        },
+        "accent": {
+          "$ref": "#/definitions/hex",
+          "description": "Override the preset accent color."
+        },
+        "radius": {
+          "enum": [
+            "sharp",
+            "soft",
+            "round"
+          ],
+          "description": "Override corner rounding."
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 70,
+          "description": "Browser tab + share title. Defaults to profile.name."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Search/share description. Defaults to profile.bio."
+        },
+        "url": {
+          "$ref": "#/definitions/url",
+          "description": "Canonical public URL of this page."
+        },
+        "image": {
+          "type": "string",
+          "description": "Share image (1200\u00d7630) path in public/ or https:// URL."
+        },
+        "lang": {
+          "type": "string",
+          "default": "en"
+        }
+      }
+    },
+    "analytics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cloudflare_token": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$",
+          "description": "Cloudflare Web Analytics beacon token (free, cookieless)."
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "credit": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small 'made with social-links' credit."
+        }
+      }
+    }
+  },
+  "definitions": {
+    "url": {
+      "type": "string",
+      "pattern": "^(https?://|mailto:|tel:)",
+      "description": "Must start with https://, http://, mailto: or tel:"
+    },
+    "hex": {
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "url": {
+          "$ref": "#/definitions/url"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 140,
+          "description": "Optional second line."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Optional icon slug, same names as socials."
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "Render as the large accent card. Use on at most one link."
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Keep in config but don't show."
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "section"
+      ],
+      "properties": {
+        "section": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Small heading that groups the links below it."
+        }
+      }
+    }
+  }
+}
