@@ -80,7 +80,7 @@ h1{font:var(--display-style) var(--display-weight) calc(clamp(2.6rem,10vw,3.9rem
 .featured:hover{background:color-mix(in oklab,var(--accent) 90%,var(--ink));border-color:transparent}
 .featured .t{font:var(--display-style) var(--display-weight) calc(1.55rem * var(--display-scale))/1.1 var(--font-display);letter-spacing:-.02em}
 .featured .d{margin-top:6px}
-.featured .d,.featured .h{color:color-mix(in oklab,var(--on-accent) 78%,transparent)}
+.featured .d,.featured .h{color:color-mix(in oklab,var(--on-accent) 92%,transparent)}
 .featured .ib{background:color-mix(in oklab,var(--on-accent) 16%,transparent);color:var(--on-accent)}
 .featured .go{width:36px;height:36px;border-radius:50%;background:var(--on-accent);color:var(--accent)}
 .featured:hover .go{color:var(--accent)}
@@ -98,7 +98,7 @@ function linkItem(l, n) {
   const external = /^https?:/i.test(l.url);
   const icon = l.icon ? `<span class="ib">${iconSvg(l.icon)}</span>` : '';
   const cls = ['link', l.featured && 'featured', !l.icon && 'no-icon'].filter(Boolean).join(' ');
-  return `<li class="rise" style="--n:${n}"><a class="${cls}" href="${esc(safeUrl(l.url))}"${external ? ' rel="noopener"' : ''}>${icon}<span class="txt"><span class="t">${esc(l.title)}</span>${l.description ? `<span class="d">${esc(l.description)}</span>` : ''}<span class="h h-inline">${esc(host)}</span></span><span class="end"><span class="h" aria-hidden="true">${esc(host)}</span><span class="go">${iconSvg('arrow')}</span></span></a></li>`;
+  return `<li class="rise" style="--n:${n}"><a class="${cls}" href="${esc(safeUrl(l.url))}"${external ? ' rel="noopener"' : ''}>${icon}<span class="txt"><span class="t">${esc(l.title)}</span>${l.description ? `<span class="d">${esc(l.description)}</span>` : ''}<span class="h h-inline" aria-hidden="true">${esc(host)}</span><span class="sr">, opens ${esc(host)}</span></span><span class="end"><span class="h" aria-hidden="true">${esc(host)}</span><span class="go">${iconSvg('arrow')}</span></span></a></li>`;
 }
 
 export function render(cfg) {
