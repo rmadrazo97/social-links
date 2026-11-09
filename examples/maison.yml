@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../schema/links.schema.json
+# Example: the maison preset for an interiors / lifestyle creator (no logo).
+# Build it with: node scripts/build.mjs --config examples/maison.yml
+profile:
+  name: Clara Vidal
+  handle: "@claravidal.home"
+  location: Lisbon
+  headline: Rooms that feel *lived in*
+  bio: I restore old apartments slowly and write down what worked, what didn't, and where I found it.
+
+links:
+  - title: The linen guide
+    description: Weights, weaves and how to wash them so they soften.
+    url: https://example.com/linen
+    featured: true
+    eyebrow: New
+    cta: Read the guide
+  - section: Projects
+  - title: The Alfama flat
+    description: Before and after, room by room.
+    url: https://example.com/alfama
+  - title: Paint colours I keep using
+    soon: true
+  - section: Elsewhere
+  - title: Instagram
+    description: Daily rooms and small fixes.
+    url: https://www.instagram.com/
+  - title: Pinterest
+    description: Boards by room and material.
+    url: https://www.pinterest.com/
+  - title: Work with me
+    description: Brand partnerships and styling.
+    url: mailto:hello@example.com?subject=Partnership
+
+socials:
+  - { icon: instagram, url: https://www.instagram.com/ }
+  - { icon: pinterest, url: https://www.pinterest.com/ }
+  - { icon: mail, url: mailto:hello@example.com }
+
+theme:
+  preset: maison
+  texture: paper
+  palette:
+    bg: "#E6E2DA"
+    ink: "#4F5A52"
+    lineStrong: "#8E9A8F"
+    accent2: "#7C8B7E"
+
+labels: { soon: Coming soon, opens: opens, mail: Email, madeWith: Made with }
+meta: { lang: en, title: Clara Vidal — interiors }
+footer: { email: hello@example.com }

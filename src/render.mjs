@@ -94,6 +94,7 @@ footer a:hover{color:var(--ink);border-color:currentColor}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}`;
 
 function linkItem(l, n) {
+  if (!l.url) return `<li class="rise" style="--n:${n}"><div class="link no-icon" style="opacity:.6"><span class="txt"><span class="t">${esc(l.title)}</span>${l.description ? `<span class="d">${esc(l.description)}</span>` : ''}</span><span class="h">${esc(l.soonLabel ?? 'Coming soon')}</span></div></li>`;
   const host = hostOf(l.url);
   const external = /^https?:/i.test(l.url);
   const icon = l.icon ? `<span class="ib">${iconSvg(l.icon)}</span>` : '';
@@ -179,7 +180,7 @@ ${analytics.cloudflare_token ? `<script defer src="https://static.cloudflareinsi
 }
 
 export function favicon(cfg) {
-  const preset = PRESETS[cfg.theme?.preset ?? 'studio'];
+  const preset = PRESETS[cfg.theme?.preset] ?? PRESETS.studio;
   const bg = cfg.theme?.accent ?? preset.light.accent;
   const fg = cfg.theme?.accent ? readableOn(cfg.theme.accent) : preset.light.onAccent;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="${bg}"/><text x="32" y="42" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="26" fill="${fg}">${esc(initials(cfg.profile.name))}</text></svg>`;

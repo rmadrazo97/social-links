@@ -45,6 +45,33 @@
           "type": "string",
           "maxLength": 80,
           "description": "Optional live line with a pulsing dot, e.g. 'Booking projects for March'."
+        },
+        "headline": {
+          "type": "string",
+          "maxLength": 90,
+          "description": "maison: large uppercase line under the logo. Wrap 1–2 words in *asterisks* to set them in the script font, e.g. 'Creando una vida *bonita* alrededor del hogar'."
+        },
+        "logo": {
+          "type": "string",
+          "pattern": "^/.+\\.svg$",
+          "description": "maison: monogram SVG in public/ (e.g. /monogram.svg), single-colour using fill=\"currentColor\". Replaces the visible name."
+        },
+        "wordmark": {
+          "type": "string",
+          "pattern": "^/.+\\.svg$",
+          "description": "maison: optional name wordmark SVG in public/, shown under the logo."
+        },
+        "logoWidth": {
+          "type": "integer",
+          "minimum": 96,
+          "maximum": 200,
+          "default": 104,
+          "description": "maison: logo width in px."
+        },
+        "emboss": {
+          "type": "boolean",
+          "default": true,
+          "description": "maison: press the logo into the paper (true) or print it flat in ink (false)."
         }
       }
     },
@@ -62,7 +89,7 @@
         "properties": {
           "icon": {
             "type": "string",
-            "description": "simple-icons slug (github, x, instagram, youtube, tiktok, bluesky, threads, mastodon, spotify, discord\u2026) or one of: linkedin, mail, globe, link, rss, phone, calendar."
+            "description": "simple-icons slug (github, x, instagram, youtube, tiktok, bluesky, threads, mastodon, spotify, discord…) or one of: linkedin, mail, globe, link, rss, phone, calendar."
           },
           "url": {
             "$ref": "#/definitions/url"
@@ -102,7 +129,8 @@
             "studio",
             "midnight",
             "bloom",
-            "mono"
+            "mono",
+            "maison"
           ],
           "default": "studio"
         },
@@ -126,6 +154,60 @@
             "round"
           ],
           "description": "Override corner rounding."
+        },
+        "texture": {
+          "enum": [
+            "paper",
+            "none"
+          ],
+          "default": "paper",
+          "description": "maison: paper grain on the background."
+        },
+        "palette": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "maison: override palette colours. ink on bg must reach 4.5:1.",
+          "properties": {
+            "bg": {
+              "$ref": "#/definitions/hex"
+            },
+            "surface": {
+              "$ref": "#/definitions/hex"
+            },
+            "surfaceHover": {
+              "$ref": "#/definitions/hex"
+            },
+            "ink": {
+              "$ref": "#/definitions/hex"
+            },
+            "soon": {
+              "$ref": "#/definitions/hex"
+            },
+            "line": {
+              "$ref": "#/definitions/hex"
+            },
+            "lineStrong": {
+              "$ref": "#/definitions/hex"
+            },
+            "accent2": {
+              "$ref": "#/definitions/hex"
+            },
+            "desk": {
+              "$ref": "#/definitions/hex"
+            },
+            "embossFill": {
+              "$ref": "#/definitions/hex"
+            },
+            "embossHi": {
+              "$ref": "#/definitions/hex"
+            },
+            "embossLo": {
+              "$ref": "#/definitions/hex"
+            },
+            "onAccent": {
+              "$ref": "#/definitions/hex"
+            }
+          }
         }
       }
     },
@@ -149,7 +231,7 @@
         },
         "image": {
           "type": "string",
-          "description": "Share image (1200\u00d7630) path in public/ or https:// URL."
+          "description": "Share image (1200×630) path in public/ or https:// URL."
         },
         "lang": {
           "type": "string",
@@ -176,6 +258,34 @@
           "type": "boolean",
           "default": true,
           "description": "Show the small 'made with social-links' credit."
+        },
+        "email": {
+          "type": "string",
+          "description": "maison: plain email shown in the footer.",
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        "copyright": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "UI words, for other languages.",
+      "properties": {
+        "soon": {
+          "type": "string"
+        },
+        "opens": {
+          "type": "string"
+        },
+        "mail": {
+          "type": "string"
+        },
+        "madeWith": {
+          "type": "string"
         }
       }
     }
@@ -194,8 +304,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "title",
-        "url"
+        "title"
       ],
       "properties": {
         "title": {
@@ -204,7 +313,8 @@
           "maxLength": 80
         },
         "url": {
-          "$ref": "#/definitions/url"
+          "$ref": "#/definitions/url",
+          "description": "Omit only together with soon: true."
         },
         "description": {
           "type": "string",
@@ -222,7 +332,38 @@
         "hidden": {
           "type": "boolean",
           "description": "Keep in config but don't show."
+        },
+        "soon": {
+          "type": "boolean",
+          "description": "Coming soon. Without url it renders as a non-clickable row tagged 'Próximamente'/'Coming soon'."
+        },
+        "cta": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "maison featured card: action line, e.g. 'Avísame cuando salga'."
+        },
+        "eyebrow": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "maison featured card: small line above the title."
         }
+      },
+      "if": {
+        "not": {
+          "required": [
+            "soon"
+          ],
+          "properties": {
+            "soon": {
+              "const": true
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "url"
+        ]
       }
     },
     "section": {

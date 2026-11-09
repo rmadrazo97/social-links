@@ -11,7 +11,7 @@ It's set up so that coding agents like Claude Code, Cursor or Codex can maintain
 - **One file to edit.** `links.yml` holds the whole page. A JSON Schema gives you autocomplete in your editor and clear errors such as `links.3.url: must match "^(https?://|mailto:|tel:)"`.
 - **Built for agents.** `AGENTS.md` sets the rules, and `npm run validate` points to the exact field to fix.
 - **Light.** No framework and no client JS. Icons are inlined and only the ones you use are included. Three runtime dependencies (`yaml`, `ajv`, `simple-icons`).
-- **Designed.** Four presets (studio, midnight, bloom, mono), each with tuned light and dark palettes. Every link shows where it goes (`github.com`), there's one optional featured card and an optional live status line. Accessible by default: 44px tap targets, focus rings, AA contrast and reduced-motion support.
+- **Designed.** Five presets. Studio, midnight, bloom and mono each have tuned light and dark palettes. **maison** is a light-only, hotel-stationery look for interiors and lifestyle creators, with a debossed monogram, ruled rows, paper grain and a script accent word. Every link shows where it goes (`github.com`), there's one optional featured card and an optional live status line. Accessible by default: 44px tap targets, focus rings, AA contrast and reduced-motion support.
 - **Free hosting.** Static assets on Cloudflare Workers, with no KV, database or paid features.
 
 ## Quick start
@@ -70,13 +70,19 @@ links:
   - { title: Portfolio, url: https://example.com, icon: globe }
 
 theme:
-  preset: studio      # studio | midnight | bloom | mono
+  preset: studio      # studio | midnight | bloom | mono | maison
   mode: auto          # auto | light | dark
   accent: "#2F45FF"   # optional override
   radius: soft        # sharp | soft | round
 ```
 
 See [`links.yml`](./links.yml) for a full example and [`schema/links.schema.json`](./schema/links.schema.json) for every field. Icons are any [simpleicons.org](https://simpleicons.org) slug, plus `linkedin`, `mail`, `globe`, `link`, `rss`, `phone` and `calendar`.
+
+### maison
+
+<p align="center"><img src="docs/maison.png" alt="The maison preset: ruled rows on textured paper with a script accent word" width="320"></p>
+
+Built for interiors, home and lifestyle creators. Add your monogram (`profile.logo`, a single-color SVG) and it's embossed into the paper. Wrap a word of your headline in `*asterisks*` to set it in script, and match your brand kit with `theme.palette`. See [`examples/maison.yml`](./examples/maison.yml) and the field list in [`AGENTS.md`](./AGENTS.md).
 
 ## Using it with an agent
 

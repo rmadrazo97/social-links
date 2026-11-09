@@ -17,6 +17,7 @@ const GENERIC = {
   rss: { title: 'RSS', svg: stroke('M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14') + '<circle cx="6" cy="18" r="1.6" fill="currentColor"/>' },
   phone: { title: 'Phone', svg: stroke('M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z') },
   calendar: { title: 'Calendar', svg: stroke('M4.5 6.5h15v13h-15zM4.5 10.5h15M8.5 4v4M15.5 4v4') },
+  'arrow-right': { title: 'Open', svg: stroke('M4 12h15M13 6l6 6-6 6') },
   arrow: { title: 'Open', svg: stroke('M7 17 17 7M8.5 7H17v8.5') },
 };
 
